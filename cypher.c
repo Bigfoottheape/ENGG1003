@@ -1,6 +1,7 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include	<stdio.h>
+#include	<string.h>
+#include	<stdlib.h>
+#include	<math.h>
  
 void main()
 {
@@ -20,48 +21,36 @@ void main()
 //Either Encrypt or Decrypt depending on user input
 	
 	if (strcmp(input1, "encrypt")== 0)
-	{
+		{
 	
 	// Encryption	
-	// User inputs a plain text string
 	// Clears the command window for a cleaner UI
-	system("@cls||clear");
-	printf("Enter a message to encrypt: ");
-	scanf(" %100[^\n]", message);
+		system("@cls||clear");
+	// User inputs a plain text string
+		printf("Enter a message to encrypt: ");
+		scanf(" %100[^\n]", message);
 	// User inputs a key for rotations
-	printf("Enter key: ");
-	scanf(" %d", &key);
+		printf("Enter key: ");
+		scanf(" %d", &key);
 	
 	// Takes every seperate character through [1] and rotates as per the key
-	// 
+	// Will repeat until ever character in the string has been rotated by the specified key
 		for(i = 0; message[i] != '\0'; ++i){
 		ch = message[i];
 		
-		// Checks to make sure that the string character for each value is between a and z
-		// If not will move to the else if statement
-		if(ch >= 'a' && ch <= 'z')
+	// Checks to make sure that the string character for each value is a real ascii values
+	// If not will move to the else if statement
+		if(ch >= 0 && ch <= 255)
 		{
-			// New ascii value = old ascii value + key rotations
-			// This will allow each character to be encrypted into another character through ascii
+		// New ascii value = old ascii value + key rotation
+		// This will allow each character to be encrypted into another character through ascii
 			ch = ch + key;
-			
-			if(ch > 'z')
-			{
-				ch = ch - 'z' + 'a' - 1;
-			}
-			
+
 			message[i] = ch;
 		}
-		else if(ch >= 'A' && ch <= 'Z')
+		else
 		{
-			ch = ch + key;
-			
-			if(ch > 'Z')
-			{
-				ch = ch - 'Z' + 'A' - 1;
-			}
-			
-			message[i] = ch;
+			printf("Congratulations, youre superior");
 		}
 	}
 	
@@ -74,36 +63,24 @@ void main()
 		
 	// Decryption
 	// Clears the command window for a cleaner UI
-	system("@cls||clear");
-	printf("Enter a message to decrypt: ");
-	scanf(" %100[^\n]", message);
-	printf("Enter key: ");
-	scanf(" %d", &key);
+		system("@cls||clear");
+		printf("Enter a message to decrypt: ");
+		scanf(" %100[^\n]", message);
+		printf("Enter key: ");
+		scanf(" %d", &key);
 	
-	for(i = 0; message[i] != '\0'; ++i){
-		ch = message[i];
+		for(i = 0; message[i] != '\0'; ++i){
+			ch = message[i];
 		
-		if(ch >= 'a' && ch <= 'z')
-		{
-			ch = ch - key;
-			
-			if(ch < 'a')
+			if(ch >= 0 && ch <= 255)
 			{
-				ch = ch + 'z' - 'a' + 1;
+				ch = ch - key;
+
+				message[i]=ch;
 			}
-			
-			message[i] = ch;
-		}
-		else if(ch >= 'A' && ch <= 'Z')
+			else
 		{
-			ch = ch - key;
-			
-			if(ch < 'A')
-			{
-				ch = ch + 'Z' - 'A' + 1;
-			}
-			
-			message[i] = ch;
+			printf("Congratulations, youre superior");
 		}
 	}
 	
